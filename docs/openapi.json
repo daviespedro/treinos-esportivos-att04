@@ -1,0 +1,1420 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Treinos Esportivos",
+    "version": "1.0.0",
+    "description": "Registra sessões de treino e consolida carga semanal. O indicador de sobrecarga tem finalidade didática."
+  },
+  "paths": {
+    "/jogadores": {
+      "post": {
+        "tags": [
+          "Jogadores"
+        ],
+        "summary": "Cadastrar jogador",
+        "responses": {
+          "201": {
+            "description": "Registro criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jogador"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JogadorEntrada"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Jogadores"
+        ],
+        "summary": "Listar jogadores",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Jogador"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "posicao",
+            "description": "Posição do atleta",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "G",
+                "Z",
+                "M",
+                "A"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "ativo",
+            "description": "Situação cadastral",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/jogadores/{id}": {
+      "get": {
+        "tags": [
+          "Jogadores"
+        ],
+        "summary": "Consultar jogador",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jogador"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do jogador",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "minimum": 1
+            }
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Jogadores"
+        ],
+        "summary": "Atualizar jogador",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jogador"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do jogador",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JogadorAtualizacao"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jogadores/{id}/desativar": {
+      "patch": {
+        "tags": [
+          "Jogadores"
+        ],
+        "summary": "Desativar jogador",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jogador"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do jogador",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/configuracao": {
+      "get": {
+        "tags": [
+          "Configuração"
+        ],
+        "summary": "Consultar limite em vigor",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Configuracao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "data",
+            "description": "Data de referência em UTC",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Configuração"
+        ],
+        "summary": "Cadastrar ou atualizar limite",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Configuracao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguracaoEntrada"
+              }
+            }
+          }
+        },
+        "description": "Sem dataVigencia, grava o limite padrão. Uma data específica vale até a próxima vigência."
+      }
+    },
+    "/treinos": {
+      "post": {
+        "tags": [
+          "Treinos"
+        ],
+        "summary": "Registrar treino",
+        "responses": {
+          "201": {
+            "description": "Registro criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Treino"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflito com o estado dos dados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Já existe um registro com esse código."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TreinoEntrada"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Treinos"
+        ],
+        "summary": "Listar e filtrar treinos",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TreinoComJogador"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "jogadorId",
+            "description": "ID do jogador",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "tipo",
+            "description": "Tipo de treino",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "F",
+                "T",
+                "E"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "posicao",
+            "description": "Posição do atleta",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "G",
+                "Z",
+                "M",
+                "A"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "inicio",
+            "description": "Primeiro dia do período, inclusive",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fim",
+            "description": "Último dia do período, inclusive",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ]
+      }
+    },
+    "/treinos/jogador/{id}": {
+      "get": {
+        "tags": [
+          "Treinos"
+        ],
+        "summary": "Listar treinos do jogador",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TreinoComJogador"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do jogador",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "tipo",
+            "description": "Tipo de treino",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "F",
+                "T",
+                "E"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "posicao",
+            "description": "Posição do atleta",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "G",
+                "Z",
+                "M",
+                "A"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "inicio",
+            "description": "Primeiro dia do período, inclusive",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fim",
+            "description": "Último dia do período, inclusive",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ]
+      }
+    },
+    "/treinos/{codigo}": {
+      "delete": {
+        "tags": [
+          "Treinos"
+        ],
+        "summary": "Excluir treino pelo código",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mensagem"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "codigo",
+            "description": "Código do treino",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "DEMO-01",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          }
+        ]
+      }
+    },
+    "/relatorios/semanal": {
+      "get": {
+        "tags": [
+          "Relatórios"
+        ],
+        "summary": "Consolidar semana",
+        "responses": {
+          "200": {
+            "description": "Operação concluída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RelatorioSemanal"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Registro ou configuração não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Registro não encontrado."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Erro"
+                },
+                "example": {
+                  "erro": "Erro interno do servidor."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "data",
+            "description": "Data de referência em UTC",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2026-10-05",
+              "format": "date"
+            }
+          }
+        ],
+        "description": "Semana de segunda-feira a domingo em UTC. Usa o limite vigente na segunda-feira. O indicador tem finalidade didática."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "JogadorEntrada": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Ana Costa",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "posicao": {
+            "type": "string",
+            "example": "G",
+            "enum": [
+              "G",
+              "Z",
+              "M",
+              "A"
+            ]
+          }
+        },
+        "required": [
+          "nome",
+          "posicao"
+        ]
+      },
+      "JogadorAtualizacao": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Ana Costa",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "posicao": {
+            "type": "string",
+            "example": "G",
+            "enum": [
+              "G",
+              "Z",
+              "M",
+              "A"
+            ]
+          }
+        },
+        "minProperties": 1
+      },
+      "Jogador": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1
+          },
+          "nome": {
+            "type": "string",
+            "example": "Ana Costa",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "posicao": {
+            "type": "string",
+            "example": "G",
+            "enum": [
+              "G",
+              "Z",
+              "M",
+              "A"
+            ]
+          },
+          "ativo": {
+            "type": "boolean",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TreinoEntrada": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "example": "DEMO-01",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "jogadorId": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1
+          },
+          "dataTreino": {
+            "type": "string",
+            "example": "2026-10-05",
+            "format": "date"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "F",
+            "enum": [
+              "F",
+              "T",
+              "E"
+            ]
+          },
+          "duracaoMin": {
+            "type": "integer",
+            "example": 60,
+            "minimum": 1
+          },
+          "intensidade": {
+            "type": "integer",
+            "example": 8,
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "codigo",
+          "jogadorId",
+          "dataTreino",
+          "tipo",
+          "duracaoMin",
+          "intensidade"
+        ]
+      },
+      "Treino": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1
+          },
+          "codigo": {
+            "type": "string",
+            "example": "DEMO-01",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "jogadorId": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1
+          },
+          "dataTreino": {
+            "type": "string",
+            "example": "2026-10-05T00:00:00.000Z",
+            "format": "date-time"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "F",
+            "enum": [
+              "F",
+              "T",
+              "E"
+            ]
+          },
+          "duracaoMin": {
+            "type": "integer",
+            "example": 60,
+            "minimum": 1
+          },
+          "intensidade": {
+            "type": "integer",
+            "example": 8,
+            "minimum": 1,
+            "maximum": 10
+          },
+          "carga": {
+            "type": "number",
+            "example": 72
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TreinoComJogador": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Treino"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "jogador": {
+                "$ref": "#/components/schemas/Jogador"
+              }
+            }
+          }
+        ]
+      },
+      "ConfiguracaoEntrada": {
+        "type": "object",
+        "properties": {
+          "cargaMaximaSemanal": {
+            "type": "number",
+            "example": 100,
+            "minimum": 0
+          },
+          "dataVigencia": {
+            "type": "string",
+            "example": null,
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "required": [
+          "cargaMaximaSemanal"
+        ]
+      },
+      "Configuracao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1
+          },
+          "cargaMaximaSemanal": {
+            "type": "number",
+            "example": 100,
+            "minimum": 0
+          },
+          "dataVigencia": {
+            "type": "string",
+            "example": null,
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "Erro": {
+        "type": "object",
+        "properties": {
+          "erro": {
+            "type": "string",
+            "example": "Dados da requisição inválidos."
+          }
+        },
+        "required": [
+          "erro"
+        ]
+      },
+      "Mensagem": {
+        "type": "object",
+        "properties": {
+          "mensagem": {
+            "type": "string",
+            "example": "Treino excluído."
+          }
+        },
+        "required": [
+          "mensagem"
+        ]
+      },
+      "RelatorioSemanal": {
+        "type": "object",
+        "properties": {
+          "semana": {
+            "type": "object",
+            "properties": {
+              "inicio": {
+                "type": "string",
+                "example": "2026-10-05",
+                "format": "date"
+              },
+              "fim": {
+                "type": "string",
+                "example": "2026-10-11",
+                "format": "date"
+              }
+            }
+          },
+          "cargaMaximaSemanal": {
+            "type": "number",
+            "example": 100
+          },
+          "totalTreinos": {
+            "type": "integer",
+            "example": 10
+          },
+          "cargaTotal": {
+            "type": "number",
+            "example": 400
+          },
+          "jogadoresEmRisco": {
+            "type": "integer",
+            "example": 1
+          },
+          "criterioRanking": {
+            "type": "string",
+            "example": "Jogadores com pelo menos um treino na semana. Empates incluem todos os atletas empatados."
+          },
+          "porJogador": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "jogadorId": {
+                  "type": "integer",
+                  "example": 1,
+                  "minimum": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Ana Costa",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "posicao": {
+                  "type": "string",
+                  "example": "G",
+                  "enum": [
+                    "G",
+                    "Z",
+                    "M",
+                    "A"
+                  ]
+                },
+                "totalTreinos": {
+                  "type": "integer",
+                  "example": 3
+                },
+                "cargaSemanal": {
+                  "type": "number",
+                  "example": 150
+                },
+                "emRisco": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "situacao": {
+                  "type": "string",
+                  "example": "RISCO DE SOBRECARGA"
+                }
+              }
+            }
+          },
+          "maiorCargaSemanal": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "jogadorId": {
+                  "type": "integer",
+                  "example": 1,
+                  "minimum": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Ana Costa",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "posicao": {
+                  "type": "string",
+                  "example": "G",
+                  "enum": [
+                    "G",
+                    "Z",
+                    "M",
+                    "A"
+                  ]
+                },
+                "totalTreinos": {
+                  "type": "integer",
+                  "example": 3
+                },
+                "cargaSemanal": {
+                  "type": "number",
+                  "example": 150
+                },
+                "emRisco": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "situacao": {
+                  "type": "string",
+                  "example": "RISCO DE SOBRECARGA"
+                }
+              }
+            }
+          },
+          "menorCargaSemanal": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "jogadorId": {
+                  "type": "integer",
+                  "example": 1,
+                  "minimum": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Ana Costa",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "posicao": {
+                  "type": "string",
+                  "example": "G",
+                  "enum": [
+                    "G",
+                    "Z",
+                    "M",
+                    "A"
+                  ]
+                },
+                "totalTreinos": {
+                  "type": "integer",
+                  "example": 3
+                },
+                "cargaSemanal": {
+                  "type": "number",
+                  "example": 150
+                },
+                "emRisco": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "situacao": {
+                  "type": "string",
+                  "example": "RISCO DE SOBRECARGA"
+                }
+              }
+            }
+          },
+          "mediaPorTipo": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tipo": {
+                  "type": "string",
+                  "example": "F",
+                  "enum": [
+                    "F",
+                    "T",
+                    "E"
+                  ]
+                },
+                "totalTreinos": {
+                  "type": "integer",
+                  "example": 4
+                },
+                "cargaMedia": {
+                  "type": "number",
+                  "example": 46.5,
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "porPosicao": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "posicao": {
+                  "type": "string",
+                  "example": "G",
+                  "enum": [
+                    "G",
+                    "Z",
+                    "M",
+                    "A"
+                  ]
+                },
+                "totalTreinos": {
+                  "type": "integer",
+                  "example": 4
+                },
+                "cargaMedia": {
+                  "type": "number",
+                  "example": 46.5,
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

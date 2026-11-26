@@ -1,0 +1,721 @@
+[
+  {
+    "caso": "Seis atletas nas quatro posições",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/jogadores"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": [
+        {
+          "id": 1,
+          "nome": "Ana Costa",
+          "posicao": "G",
+          "ativo": true,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z"
+        },
+        {
+          "id": 2,
+          "nome": "Bruno Lima",
+          "posicao": "Z",
+          "ativo": true,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z"
+        },
+        {
+          "id": 3,
+          "nome": "Carla Reis",
+          "posicao": "M",
+          "ativo": true,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z"
+        },
+        {
+          "id": 4,
+          "nome": "Diego Alves",
+          "posicao": "A",
+          "ativo": true,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z"
+        },
+        {
+          "id": 5,
+          "nome": "Elisa Rocha",
+          "posicao": "Z",
+          "ativo": true,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z"
+        },
+        {
+          "id": 6,
+          "nome": "Felipe Dias",
+          "posicao": "A",
+          "ativo": true,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z"
+        }
+      ]
+    }
+  },
+  {
+    "caso": "Limite semanal de 100 pontos",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/configuracao"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": {
+        "id": 1,
+        "cargaMaximaSemanal": 100,
+        "dataVigencia": null
+      }
+    }
+  },
+  {
+    "caso": "Primeira semana com atleta acima do limite, empate no mínimo e atleta no limite",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/relatorios/semanal?data=2026-10-05"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": {
+        "semana": {
+          "inicio": "2026-10-05",
+          "fim": "2026-10-11"
+        },
+        "cargaMaximaSemanal": 100,
+        "totalTreinos": 10,
+        "cargaTotal": 400,
+        "jogadoresEmRisco": 1,
+        "criterioRanking": "Jogadores com pelo menos um treino na semana. Empates incluem todos os atletas empatados.",
+        "porJogador": [
+          {
+            "jogadorId": 1,
+            "nome": "Ana Costa",
+            "posicao": "G",
+            "cargaSemanal": 150,
+            "totalTreinos": 3,
+            "emRisco": true,
+            "situacao": "RISCO DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 2,
+            "nome": "Bruno Lima",
+            "posicao": "Z",
+            "cargaSemanal": 100,
+            "totalTreinos": 2,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 3,
+            "nome": "Carla Reis",
+            "posicao": "M",
+            "cargaSemanal": 60,
+            "totalTreinos": 2,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 4,
+            "nome": "Diego Alves",
+            "posicao": "A",
+            "cargaSemanal": 30,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 5,
+            "nome": "Elisa Rocha",
+            "posicao": "Z",
+            "cargaSemanal": 30,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 6,
+            "nome": "Felipe Dias",
+            "posicao": "A",
+            "cargaSemanal": 30,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          }
+        ],
+        "maiorCargaSemanal": [
+          {
+            "jogadorId": 1,
+            "nome": "Ana Costa",
+            "posicao": "G",
+            "cargaSemanal": 150,
+            "totalTreinos": 3,
+            "emRisco": true,
+            "situacao": "RISCO DE SOBRECARGA"
+          }
+        ],
+        "menorCargaSemanal": [
+          {
+            "jogadorId": 4,
+            "nome": "Diego Alves",
+            "posicao": "A",
+            "cargaSemanal": 30,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 5,
+            "nome": "Elisa Rocha",
+            "posicao": "Z",
+            "cargaSemanal": 30,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 6,
+            "nome": "Felipe Dias",
+            "posicao": "A",
+            "cargaSemanal": 30,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          }
+        ],
+        "mediaPorTipo": [
+          {
+            "tipo": "F",
+            "totalTreinos": 4,
+            "cargaMedia": 46.5
+          },
+          {
+            "tipo": "T",
+            "totalTreinos": 3,
+            "cargaMedia": 38
+          },
+          {
+            "tipo": "E",
+            "totalTreinos": 3,
+            "cargaMedia": 33.33
+          }
+        ],
+        "porPosicao": [
+          {
+            "posicao": "G",
+            "totalTreinos": 3,
+            "cargaMedia": 50
+          },
+          {
+            "posicao": "Z",
+            "totalTreinos": 3,
+            "cargaMedia": 43.33
+          },
+          {
+            "posicao": "M",
+            "totalTreinos": 2,
+            "cargaMedia": 30
+          },
+          {
+            "posicao": "A",
+            "totalTreinos": 2,
+            "cargaMedia": 30
+          }
+        ]
+      }
+    },
+    "captura": "01-relatorio-semana-05.png"
+  },
+  {
+    "caso": "Segunda semana com mudança na maior carga e nas médias",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/relatorios/semanal?data=2026-10-12"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": {
+        "semana": {
+          "inicio": "2026-10-12",
+          "fim": "2026-10-18"
+        },
+        "cargaMaximaSemanal": 100,
+        "totalTreinos": 10,
+        "cargaTotal": 386,
+        "jogadoresEmRisco": 1,
+        "criterioRanking": "Jogadores com pelo menos um treino na semana. Empates incluem todos os atletas empatados.",
+        "porJogador": [
+          {
+            "jogadorId": 1,
+            "nome": "Ana Costa",
+            "posicao": "G",
+            "cargaSemanal": 56,
+            "totalTreinos": 2,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 2,
+            "nome": "Bruno Lima",
+            "posicao": "Z",
+            "cargaSemanal": 48,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 3,
+            "nome": "Carla Reis",
+            "posicao": "M",
+            "cargaSemanal": 173,
+            "totalTreinos": 3,
+            "emRisco": true,
+            "situacao": "RISCO DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 4,
+            "nome": "Diego Alves",
+            "posicao": "A",
+            "cargaSemanal": 57,
+            "totalTreinos": 2,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 5,
+            "nome": "Elisa Rocha",
+            "posicao": "Z",
+            "cargaSemanal": 16,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          },
+          {
+            "jogadorId": 6,
+            "nome": "Felipe Dias",
+            "posicao": "A",
+            "cargaSemanal": 36,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          }
+        ],
+        "maiorCargaSemanal": [
+          {
+            "jogadorId": 3,
+            "nome": "Carla Reis",
+            "posicao": "M",
+            "cargaSemanal": 173,
+            "totalTreinos": 3,
+            "emRisco": true,
+            "situacao": "RISCO DE SOBRECARGA"
+          }
+        ],
+        "menorCargaSemanal": [
+          {
+            "jogadorId": 5,
+            "nome": "Elisa Rocha",
+            "posicao": "Z",
+            "cargaSemanal": 16,
+            "totalTreinos": 1,
+            "emRisco": false,
+            "situacao": "SEM SINAL DE SOBRECARGA"
+          }
+        ],
+        "mediaPorTipo": [
+          {
+            "tipo": "F",
+            "totalTreinos": 4,
+            "cargaMedia": 54
+          },
+          {
+            "tipo": "T",
+            "totalTreinos": 3,
+            "cargaMedia": 38
+          },
+          {
+            "tipo": "E",
+            "totalTreinos": 3,
+            "cargaMedia": 18.67
+          }
+        ],
+        "porPosicao": [
+          {
+            "posicao": "G",
+            "totalTreinos": 2,
+            "cargaMedia": 28
+          },
+          {
+            "posicao": "Z",
+            "totalTreinos": 2,
+            "cargaMedia": 32
+          },
+          {
+            "posicao": "M",
+            "totalTreinos": 3,
+            "cargaMedia": 57.67
+          },
+          {
+            "posicao": "A",
+            "totalTreinos": 3,
+            "cargaMedia": 31
+          }
+        ]
+      }
+    },
+    "captura": "02-relatorio-semana-12.png"
+  },
+  {
+    "caso": "Semana sem treinos",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/relatorios/semanal?data=2026-10-19"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": {
+        "semana": {
+          "inicio": "2026-10-19",
+          "fim": "2026-10-25"
+        },
+        "cargaMaximaSemanal": 100,
+        "totalTreinos": 0,
+        "cargaTotal": 0,
+        "jogadoresEmRisco": 0,
+        "criterioRanking": "Jogadores com pelo menos um treino na semana. Empates incluem todos os atletas empatados.",
+        "porJogador": [],
+        "maiorCargaSemanal": [],
+        "menorCargaSemanal": [],
+        "mediaPorTipo": [
+          {
+            "tipo": "F",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          },
+          {
+            "tipo": "T",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          },
+          {
+            "tipo": "E",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          }
+        ],
+        "porPosicao": [
+          {
+            "posicao": "G",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          },
+          {
+            "posicao": "Z",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          },
+          {
+            "posicao": "M",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          },
+          {
+            "posicao": "A",
+            "totalTreinos": 0,
+            "cargaMedia": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "caso": "Cadastro de atleta para os cenários de escrita",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/jogadores",
+      "corpo": {
+        "nome": "Atleta Swagger",
+        "posicao": "G"
+      }
+    },
+    "resposta": {
+      "status": 201,
+      "corpo": {
+        "ativo": true,
+        "id": 7,
+        "nome": "Atleta Swagger",
+        "posicao": "G",
+        "updatedAt": "2026-11-26T11:50:22.324Z",
+        "createdAt": "2026-11-26T11:50:22.324Z"
+      }
+    }
+  },
+  {
+    "caso": "Criação do treino físico com carga calculada de 72 pontos",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/treinos",
+      "corpo": {
+        "codigo": "SWAGGER-CARGA",
+        "jogadorId": 7,
+        "dataTreino": "2026-10-26",
+        "tipo": "F",
+        "duracaoMin": 60,
+        "intensidade": 8
+      }
+    },
+    "resposta": {
+      "status": 201,
+      "corpo": {
+        "carga": 72,
+        "id": 21,
+        "codigo": "SWAGGER-CARGA",
+        "jogadorId": 7,
+        "dataTreino": "2026-10-26T00:00:00.000Z",
+        "tipo": "F",
+        "duracaoMin": 60,
+        "intensidade": 8,
+        "updatedAt": "2026-11-26T11:50:22.591Z",
+        "createdAt": "2026-11-26T11:50:22.591Z"
+      }
+    },
+    "captura": "03-treino-carga-72.png"
+  },
+  {
+    "caso": "Código duplicado",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/treinos",
+      "corpo": {
+        "codigo": "SWAGGER-CARGA",
+        "jogadorId": 7,
+        "dataTreino": "2026-10-26",
+        "tipo": "F",
+        "duracaoMin": 60,
+        "intensidade": 8
+      }
+    },
+    "resposta": {
+      "status": 409,
+      "corpo": {
+        "erro": "Já existe um registro com esse código."
+      }
+    },
+    "captura": "04-codigo-duplicado.png"
+  },
+  {
+    "caso": "Intensidade acima de 10",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/treinos",
+      "corpo": {
+        "codigo": "SWAGGER-INTENSIDADE",
+        "jogadorId": 7,
+        "dataTreino": "2026-10-26",
+        "tipo": "F",
+        "duracaoMin": 60,
+        "intensidade": 11
+      }
+    },
+    "resposta": {
+      "status": 400,
+      "corpo": {
+        "erro": "intensidade deve ser um inteiro entre 1 e 10."
+      }
+    },
+    "captura": "05-intensidade-invalida.png"
+  },
+  {
+    "caso": "Duração igual a zero",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/treinos",
+      "corpo": {
+        "codigo": "SWAGGER-DURACAO",
+        "jogadorId": 7,
+        "dataTreino": "2026-10-26",
+        "tipo": "F",
+        "duracaoMin": 0,
+        "intensidade": 8
+      }
+    },
+    "resposta": {
+      "status": 400,
+      "corpo": {
+        "erro": "duracaoMin deve ser um inteiro positivo."
+      }
+    },
+    "captura": "06-duracao-invalida.png"
+  },
+  {
+    "caso": "Jogador inexistente",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/treinos",
+      "corpo": {
+        "codigo": "SWAGGER-AUSENTE",
+        "jogadorId": 2147483647,
+        "dataTreino": "2026-10-26",
+        "tipo": "F",
+        "duracaoMin": 60,
+        "intensidade": 8
+      }
+    },
+    "resposta": {
+      "status": 404,
+      "corpo": {
+        "erro": "Jogador não encontrado."
+      }
+    },
+    "captura": "07-jogador-inexistente.png"
+  },
+  {
+    "caso": "Desativação do atleta com treino registrado",
+    "requisicao": {
+      "metodo": "PATCH",
+      "rota": "/jogadores/7/desativar"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": {
+        "id": 7,
+        "nome": "Atleta Swagger",
+        "posicao": "G",
+        "ativo": false,
+        "createdAt": "2026-11-26T11:50:22.000Z",
+        "updatedAt": "2026-11-26T11:50:24.519Z"
+      }
+    }
+  },
+  {
+    "caso": "Novo treino para jogador inativo",
+    "requisicao": {
+      "metodo": "POST",
+      "rota": "/treinos",
+      "corpo": {
+        "codigo": "SWAGGER-INATIVO",
+        "jogadorId": 7,
+        "dataTreino": "2026-10-26",
+        "tipo": "F",
+        "duracaoMin": 60,
+        "intensidade": 8
+      }
+    },
+    "resposta": {
+      "status": 409,
+      "corpo": {
+        "erro": "Jogador inativo."
+      }
+    },
+    "captura": "08-jogador-inativo.png"
+  },
+  {
+    "caso": "Histórico preservado após desativação",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/treinos/jogador/7"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": [
+        {
+          "carga": 72,
+          "id": 21,
+          "codigo": "SWAGGER-CARGA",
+          "jogadorId": 7,
+          "dataTreino": "2026-10-26T00:00:00.000Z",
+          "tipo": "F",
+          "duracaoMin": 60,
+          "intensidade": 8,
+          "createdAt": "2026-11-26T11:50:22.000Z",
+          "updatedAt": "2026-11-26T11:50:22.000Z",
+          "jogador": {
+            "id": 7,
+            "nome": "Atleta Swagger",
+            "posicao": "G",
+            "ativo": false,
+            "createdAt": "2026-11-26T11:50:22.000Z",
+            "updatedAt": "2026-11-26T11:50:24.000Z"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "caso": "Filtro por atleta, data, tipo e posição",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/treinos?jogadorId=1&tipo=F&posicao=G&inicio=2026-10-05&fim=2026-10-11"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": [
+        {
+          "carga": 72,
+          "id": 1,
+          "codigo": "DEMO-01",
+          "jogadorId": 1,
+          "dataTreino": "2026-10-05T00:00:00.000Z",
+          "tipo": "F",
+          "duracaoMin": 60,
+          "intensidade": 8,
+          "createdAt": "2026-11-26T11:47:08.000Z",
+          "updatedAt": "2026-11-26T11:47:08.000Z",
+          "jogador": {
+            "id": 1,
+            "nome": "Ana Costa",
+            "posicao": "G",
+            "ativo": true,
+            "createdAt": "2026-11-26T11:47:08.000Z",
+            "updatedAt": "2026-11-26T11:47:08.000Z"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "caso": "Exclusão por código",
+    "requisicao": {
+      "metodo": "DELETE",
+      "rota": "/treinos/SWAGGER-CARGA"
+    },
+    "resposta": {
+      "status": 200,
+      "corpo": {
+        "mensagem": "Treino excluído."
+      }
+    }
+  },
+  {
+    "caso": "Exclusão de código ausente",
+    "requisicao": {
+      "metodo": "DELETE",
+      "rota": "/treinos/SWAGGER-CARGA"
+    },
+    "resposta": {
+      "status": 404,
+      "corpo": {
+        "erro": "Treino não encontrado."
+      }
+    }
+  },
+  {
+    "caso": "Banco indisponível com resposta genérica",
+    "requisicao": {
+      "metodo": "GET",
+      "rota": "/jogadores"
+    },
+    "resposta": {
+      "status": 500,
+      "corpo": {
+        "erro": "Erro interno do servidor."
+      }
+    },
+    "captura": "09-erro-interno.png"
+  }
+]
